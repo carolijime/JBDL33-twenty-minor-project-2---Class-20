@@ -1,0 +1,18 @@
+#same as application.properties file (can only have one of them, just different notation
+#file could be .yml or .yaml (same for .jpg, .jpeg or .htm, html) for supporting Microsoft so .yml is the same as .yaml plus the new features, old extensions (.yaml, .jpeg, etc..) are not removed for compatibility
+server:
+  port: 9000
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/JBDL33_library?createDatabaseIfNotExist=true
+    username: root
+    password: 7u6iwTmjisGoAi
+
+#custom property below
+custom:
+  my_prop: hello_world
