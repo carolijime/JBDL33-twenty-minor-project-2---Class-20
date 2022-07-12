@@ -1,5 +1,7 @@
 package com.example.JBDL33twelveminorproject1.models;
 
+import com.example.JBDL33twelveminorproject1.response.BookSearchResponse;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -29,6 +31,7 @@ public class Book {
 
     @ManyToOne
     @JoinColumn
+//    @JsonIgnoreProperties("bookList") //not needed since creation of BookSearchResponse //it will ignore the bookList that Author has so no cycling references. We ignore this one rather thant he one in author because this is the many to one reference
     private Author author;
 
     //one student can have multiple books
@@ -51,4 +54,18 @@ public class Book {
     //automatically will add/update the update time to the record
     @UpdateTimestamp
     private Date updatedOn;
+
+    public BookSearchResponse to(){
+        return BookSearchResponse.builder()
+                .id(id)
+                .name(name)
+                .cost(cost)
+                .genre(genre)
+                .author(author)
+                .student(student)
+                .transactionList(transactionList)
+                .createdOn(createdOn)
+                .updatedOn(updatedOn)
+                .build();
+    }
 }
