@@ -32,6 +32,12 @@ public class StudentCreateRequest {
 
     private String email;
 
+    @NotBlank
+    private  String username;
+
+    @NotBlank
+    private String password;
+
     //this is ONLY to create a new student, that is why by default we set accountStatus as active
     public Student to(){
         return Student.builder()
@@ -40,6 +46,14 @@ public class StudentCreateRequest {
                 .address(address)
                 .email(email)
                 .accountStatus(AccountStatus.ACTIVE)
+                .build();
+    }
+
+    public UserCreateRequest toUser(){
+        return UserCreateRequest.builder()
+                .student(to())
+                .username(username)
+                .password(password)
                 .build();
     }
 

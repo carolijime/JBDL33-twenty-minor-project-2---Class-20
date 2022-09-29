@@ -12,9 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Service
 public class BookService {
@@ -34,8 +33,12 @@ public class BookService {
 //        return this.sampleText;
 //    }
 
-    public void  create(BookCreateRequest bookCreateRequest){
+    public void createOrUpdate(BookCreateRequest bookCreateRequest){
         Book book = bookCreateRequest.to();
+        createOrUpdate(book);
+    }
+
+    public void createOrUpdate(Book book){
         Author author = book.getAuthor();
 
         //Find if the author with the given email exists in DB or not
@@ -69,6 +72,8 @@ public class BookService {
                 return bookRepository.findByAuthor_Name(value);
             case GENRE:
                 return bookRepository.findByGenre(Genre.valueOf(value));
+            case BOOK_ID:
+                return bookRepository.findAllById(Collections.singletonList(Integer.parseInt(value)));
             default:
                 return  new ArrayList<>();
         }

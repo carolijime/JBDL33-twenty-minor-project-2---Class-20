@@ -29,7 +29,7 @@ public class BookController {
 
     @PostMapping("/book")
     public void createBook(@Valid @RequestBody BookCreateRequest bookCreateRequest ){
-        bookService.create(bookCreateRequest);
+        bookService.createOrUpdate(bookCreateRequest);
     }
 
     //GET - Filter functionality / search

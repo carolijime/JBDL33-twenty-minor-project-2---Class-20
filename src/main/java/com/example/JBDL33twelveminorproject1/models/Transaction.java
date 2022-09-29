@@ -18,6 +18,10 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    //unique, ID only for end user, like "tracking number" or "order number"
+    //we will return this instead of the ID (for security)
+    private String externalTxnId;
+
     @Enumerated
     private TransactionType transactionType;
 
@@ -25,11 +29,11 @@ public class Transaction {
 
     @ManyToOne
     @JoinColumn
-    private Book my_book;
+    private Book book;
 
     @ManyToOne
     @JoinColumn
-    private Student my_student;
+    private Student student;
 
     @CreationTimestamp
     private Date transactionDate;

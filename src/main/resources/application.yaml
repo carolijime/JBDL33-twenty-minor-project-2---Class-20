@@ -13,6 +13,16 @@ spring:
     username: root
     password: 7u6iwTmjisGoAi
 
-#custom property below
+#custom properties below
 custom:
   my_prop: hello_world
+
+book:
+  return:
+    due_date: 14
+
+users:
+  student:
+    authority: std
+  admin:
+    authority: adm

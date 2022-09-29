@@ -1,13 +1,17 @@
 package com.example.JBDL33twelveminorproject1.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+//has to be serializable to be saved in cache (redis)
 @Entity
 @Getter
 @Setter
@@ -15,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Student {
+public class Student implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,8 +52,13 @@ public class Student {
     private List<Book> bookList;
 
     //one student can have multiple transaction (1:N)
-    @OneToMany(mappedBy = "my_student")
+    @OneToMany(mappedBy = "student")
     private List<Transaction> transactionList;
+
+    @OneToOne
+    @JoinColumn
+    @JsonIgnoreProperties({"student", "admin", "password"}) //if not, circular reference
+    private MyUser myUser;
 
 //    //one student can only have one account (1:1)
 //    private StudentAccount studentAccount;

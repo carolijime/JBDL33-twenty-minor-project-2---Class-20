@@ -1,7 +1,6 @@
 package com.example.JBDL33twelveminorproject1.models;
 
 import com.example.JBDL33twelveminorproject1.response.BookSearchResponse;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -44,7 +43,7 @@ public class Book {
 
 //    private Student tempColumn; //just for explaining back reference
 
-    @OneToMany(mappedBy = "my_book")
+    @OneToMany(mappedBy = "book")
     private List<Transaction> transactionList;
 
     //automatically will add the creation date to the record
